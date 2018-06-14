@@ -6,7 +6,13 @@
 #
 
 library(shiny)
+library(tidyverse)
+library(here)
+source(here("code/read_wrangle.R"))
 
+vias = read_wrangle_data()
+
+profissoes_nos_dados = vias
 shinyServer(function(input, output) {
 
   output$distPlot <- renderPlot({
