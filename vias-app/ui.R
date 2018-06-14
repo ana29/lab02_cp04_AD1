@@ -6,25 +6,44 @@
 #
 
 library(shiny)
+library(shiny)
+library(tidyverse)
+library(here)
+library(plotly)
+
+dados = read_csv(here("data/respostas-merepresenta-2016.csv"))
+respostas= dados%>% gather(key = "tema", value = "resposta", 10:23)
+
+
 
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  titlePanel("#MeRepresenta - XXXXXXXXXXX "),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      selectInput("partidos", "Partido:",
+                  choices =c(Choose='' ,respostas$sigla_partido) ),
+      
+      selectInput("votos", "Voto:",
+                  choices = c(Choose='', "Sim", "Não") ),
+
+      uiOutput("candidatoSelecao"),
+      
+      selectInput("pautas","Pautas:",
+                  choices = c(Choose='' ,respostas$tema))
+   
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      #plotOutput("main")
+      plotlyOutput("main") 
+      
+      
+      
     )
   )
 ))
