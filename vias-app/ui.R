@@ -19,7 +19,7 @@ respostas= dados%>% gather(key = "tema", value = "resposta", 10:23)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("#MeRepresenta - XXXXXXXXXXX "),
+  titlePanel("Lab02_CP04 "),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
@@ -27,11 +27,7 @@ shinyUI(fluidPage(
       selectInput("partidos", "Partido:",
                   choices =c(Choose='' ,respostas$sigla_partido) ),
       
-      selectInput("votos", "Voto:",
-                  choices = c(Choose='', "Sim", "Não") ),
-
-      uiOutput("candidatoSelecao"),
-      
+    
       selectInput("pautas","Pautas:",
                   choices = c(Choose='' ,respostas$tema))
    
